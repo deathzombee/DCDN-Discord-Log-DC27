@@ -1,0 +1,3840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DarkNet Agents - hardware</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 500;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+
+.chatlog__bot-tag {
+    margin-left: 0.3em;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    padding: 1px 2px;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    position: relative;
+    top: -.2em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/195964762993983490/c3dff8bc42ce61b23022df44017e181d.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">DarkNet Agents</div>
+        <div class="info__channel-name">hardware</div>
+        
+
+        <div class="info__channel-message-count">197 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">17-Oct-18 12:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="jonah#2861">@jonah</span> was looking for a place to chat with folks about pcb design, prototyping, fab, ordering components, soldering, reflow, and rework, etc.. so here we go.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">17-Oct-18 12:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="❤" title="❤" src="https://twemoji.maxcdn.com/2/72x72/2764.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">17-Oct-18 03:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji " alt="❤" title="❤" src="https://twemoji.maxcdn.com/2/72x72/2764.png" /> indeed</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">17-Oct-18 04:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="🖤" title="🖤" src="https://twemoji.maxcdn.com/2/72x72/1f5a4.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">17-Oct-18 04:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://macrofab.com/blog/mep-ep-141-it-depends-an-in-depth-look-at-mlccs-with-james-lewis/">https://macrofab.com/blog/mep-ep-141-it-depends-an-in-depth-look-at-mlccs-with-james-lewis/</a>  Might be an interesting episode fro you guys. Its about capacitors.  I understood some of those words</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://macrofab.com/blog/mep-ep-141-it-depends-an-in-depth-look-at-mlccs-with-james-lewis"><span class="markdown">MacroFab Engineering Podcast - EP #141: MLCCs with James Lewis</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">MacroFab Engineering Podcast: James Lewis aka the Bald Engineer joins Parker and Stephen on a leap into the deep end on Ceramic Capacitors (MLCCs)</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://mxcdn.macrofab.com/wp-content/uploads/2018/10/mep_ep_141_featured_image.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://mxcdn.macrofab.com/wp-content/uploads/2018/10/mep_ep_141_featured_image.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">17-Oct-18 09:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I am  working on a few projects meow. one is assembling a  <a href="https://github.com/whitequark/Glasgow">https://github.com/whitequark/Glasgow</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/whitequark/Glasgow"><span class="markdown">whitequark/Glasgow</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Scottish Army Knife for electronics. Contribute to whitequark/Glasgow development by creating an account on GitHub.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars0.githubusercontent.com/u/54771?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars0.githubusercontent.com/u/54771?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:21 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I just picked up some nixie tubes. My goal is to eventually make a high voltage meter to replace the one currently in my ring launcher. It has to measure in the 2000 volt range, and also survive being near the EMP that goes off when ever I fire the launcher.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Which also means I need to figure out how large of a field the thing puts out.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://krux.org/article/Project_Hathor">https://krux.org/article/Project_Hathor</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:46 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh that&#39;s neat</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="krux#2949">@krux</span> do you have any idea where I might be able to get a prototype-size run of these fab&#39;d?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://github.com/myriadrf/LimeSDR-QPCIe/blob/master/hardware/1v2/Project%2520Outputs%2520for%2520LimeSDR-QPCIe_1v2/LimeSDR-QPCIe_1v2_readme_r0.txt">https://github.com/myriadrf/LimeSDR-QPCIe/blob/master/hardware/1v2/Project%20Outputs%20for%20LimeSDR-QPCIe_1v2/LimeSDR-QPCIe_1v2_readme_r0.txt</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/myriadrf/LimeSDR-QPCIe/blob/master/hardware/1v2/Project%20Outputs%20for%20LimeSDR-QPCIe_1v2/LimeSDR-QPCIe_1v2_readme_r0.txt"><span class="markdown">myriadrf/LimeSDR-QPCIe</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Contribute to myriadrf/LimeSDR-QPCIe development by creating an account on GitHub.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://avatars2.githubusercontent.com/u/5247819?s=400&v=4">
+                                                <img class="chatlog__embed-thumbnail" src="https://avatars2.githubusercontent.com/u/5247819?s=400&v=4" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It seems to fall into the &quot;special consultations&quot; category for most of the vendors I have looked at and I abhor talking to people on the phone.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:54 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If you just want PCBs, then OSH Park. If you want the boards pick and placed, then Seeed or PCB Way.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:55 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">They&#39;re 14-layer boards with special needs</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:57 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ahh.. Then OSH Park isn&#39;t an option. I&#39;d check with PCB Way. They can handle 14 layer.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:57 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:58 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">You can just get boards as well if you plan to solder yourself</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:58 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I didn&#39;t see it in the quoting tool, I&#39;ll drop them an email</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yeah, it&#39;s a 2k part fine pitch</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m still debating but probably pnp for most of it.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 01:02 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I used them for the eggplant boards. And CPV badges are always made through them as well</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 01:03 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://wiki.myriadrf.org/LimeSDR-QPCIe_v1.2_hardware_description">https://wiki.myriadrf.org/LimeSDR-QPCIe_v1.2_hardware_description</a> here&#39;s a link that actually works</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><div class="pre pre--multiline ">https://github.com/myriadrf/LimeSDR-QPCIe/blob/master/hardware/1v2/Project%20Outputs%20for%20LimeSDR-QPCIe_1v2/LimeSDR-QPCIe_1v2_readme_r0.txt</div></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Apparently discord eats the urls.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Anyway, thanks, I&#39;ll reach out to pcbway.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/418307765358821386/157de3f63b26ace4bbc631d38e57a175.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="WeLuffYou#0630" data-user-id="418307765358821386">WeLuffYou</span>
+                <span class="chatlog__timestamp">18-Oct-18 01:19 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This is a holon I wanted to see. Thanks jonah!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And krux!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 01:20 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">In retrospect, we probably could have used this guild a while ago, to help people speed badge assembly and other things</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/418307765358821386/157de3f63b26ace4bbc631d38e57a175.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="WeLuffYou#0630" data-user-id="418307765358821386">WeLuffYou</span>
+                <span class="chatlog__timestamp">18-Oct-18 01:23 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Well, it is here now!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🙏" title="🙏" src="https://twemoji.maxcdn.com/2/72x72/1f64f.png" />
+                                    <span class="chatlog__reaction-count">2</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">3</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="jonah#2861">@jonah</span>  let us know what the quotes come out to be... this is a special stackup for RF performance.  If the materials, stackup thickness, finishing thickness, and dialectric selection are not all just-so (in the readme), then the performance will suffer, potentially greatly.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If anyone thinks harware design is &quot;black magic,&quot; then they have never been involved with RF hardware design.  It&#39;s insanely black magic.   It makes typical hardware design look like child&#39;s play...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">also be careful when populating components.  PNP is a good idea here.  See if the readme specifies Pb, Pb-Free, No-clean, etc, and make a point to use the approach they specify.  If they don&#39;t, then I would reocmmende a Pb solder with post-wash if possible.  (some only do Pb-free these days)   The no-clean stuff will likely cause problems over time in the RF analog sections as the residue oxidizes.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Also important is part number selection in the analog sections.  If they call out a specific part number for a cap, use it.  Don&#39;t substitute it with another cap of the same value.  It&#39;s parasitics (remember the analog electronics quests?) will be different and, again, affect the RF performance.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">digital section stuff is who-cares....  but the analog section stuff is extremely sensitive to the tiniest variances..  If each tiny variance causes a 1% deviation from the design&#39;s theoretical max performance, then it doesn&#39;t take much to loose 15% or more.   In my experience sitting next to analog RF designers in a previous job, something like same-value-different-part-number capacitor substitutions could easily cause 3% loss of performance of the whole RF front end.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That said, I probably just scared you off from trying -- didn&#39;t mean to do that.   By all means try it.  I just wanted you make you aware of the delicacy of the RF section...</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:36 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Of course a lot of your expense on a pick and place job is the setup, so getting one or two of a thing made is likely going to be fairly costly.  An example... the prototypes for DC25 pick and placed board cost $51.85 each when we had 11 made.. but for the 1012 production boards that were made it was $10.45 each. Though I don&#39;t think the production quote included the cost of the MCU, since those we had to consign.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 03:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="gateherder#7641">@gateherder</span> yeah, that&#39;s why I was asking around about fab.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m not really scared, just braced for an unpleasant amount of calling around to make sure I find a place that can actually make it to spec</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">18-Oct-18 03:44 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="gateherder#7641">@gateherder</span> I&#39;ve heard other people mention that RF Is still black magic to them. Someone posted a RF PCB Ruler on twitter and the comments basically gave me the impression you were trying to give jonah. Its on a whole other level</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Oct-18 03:46 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The ruler BTW: <a href="https://www.sv1afn.com/pcbruler.html">https://www.sv1afn.com/pcbruler.html</a>  (scroll down <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /> )</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.sv1afn.com/pcbruler.html"><span class="markdown">pcbruler</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Elegant Imperial metric PCB ruler</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 04:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh nice. I have a similar but smaller and less elegant one</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">18-Oct-18 04:48 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Without all the rf stuff</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">22-Oct-18 08:30 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yeah my pcb ruler is also pretty puny in comparison to that one, <span class="mention" title="babint#2941">@babint</span> ...  lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">22-Oct-18 08:40 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Everything is black magic, until you understand it.  <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" />   RF is an extension of high speed design digital principals..   with high speed digital you have to start worrying about reflections (impedance mismatches, use 45deg route corners instead of 90def, etc) and other issues.  RF is just the next progression (use rounded routes instead of corners, etc)...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="jonah#2861">@jonah</span> I used to know a few fabs that did complete controlled stackup and lots of various dialectrics, but have been doing straight FPGA work for the last ten years so I&#39;m not sure who&#39;s still around; or as <span class="mention" title="krux#2949">@krux</span> said, how much it will cost you to do a specialty board at a small quantity..  I&#39;ll keep my ears peeled though..</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">22-Oct-18 08:42 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thanks! I have another month or two of research time before I&#39;m actually going to buy something thing</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="mr.expert#7215" data-user-id="474647352989450241">mr.expert</span>
+                <span class="chatlog__timestamp">22-Oct-18 06:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Just getting caught-up. Good idea <span class="mention" title="krux#2949">@krux</span> . I do hardware more than software these days. Just sent my first product off to my contract manufacturer (CM). Mixed-signal Industrial board that is going to be sold through Arrow.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I do Industrial electronics and know a bit about manufacturing. Also I dabble in audio.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Also, all you have to remember for RF is that anything can be a transmitter <img class="emoji " alt="😉" title="😉" src="https://twemoji.maxcdn.com/2/72x72/1f609.png" /> Or a receiver for that matter.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">22-Oct-18 06:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">&quot;All&quot; <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="mr.expert#7215" data-user-id="474647352989450241">mr.expert</span>
+                <span class="chatlog__timestamp">22-Oct-18 06:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Heh.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">29-Oct-18 12:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Don&#39;t suppose anyone here is going to hackaday&#39;s supercon this weekend?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">29-Oct-18 01:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;ll be there</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">29-Oct-18 01:37 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="krux#2949">@krux</span> Sweet. I&#39;ll be there F-Sun (hopefully). I think I met you at Toorcon right? You had the hat and the cool steampunk goggles.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">29-Oct-18 01:37 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That would be me</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">29-Oct-18 02:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="krux#2949">@krux</span> Awesome. Maybe i&#39;ll say hi properly this time. You seemed a man of few words. I&#39;m more a stream of consciousness but I suck at starting a conversation.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">07-Nov-18 11:43 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hey hardware hackers...  looking for a new, easily travelable, flexible usb wifi+btle adapter..  Need both windows 7 and linux support; hopefully can use to do bleah and other BLE hackin but also general purpose wifi when I need it...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">any particular recommendations folks have tried and loved?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">07-Nov-18 05:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="gateherder#7641">@gateherder</span> ubertooth and an alfa</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">08-Nov-18 10:31 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Gater_Byte#8740">@Gater_Byte</span> ubertooth is read/sniff only though, yes?  Needing bidir.. Will look into alfa, thx</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">08-Nov-18 10:33 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">My impression is that it&#39;s quite a bit of work to use the ubertooth to do app layer stuff on Bluetooth classic or ble</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">...if it&#39;s possible</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Sort of the same with just about anything ,really</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Chips/packages that offer straight Bluetooth phy excepted of course</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Nov-18 10:35 AM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">You can make something that is a buttload of work, but there is no open software and gateware full stack for sdr Bluetooth</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m working on a Swiss Army software defined radio project in my limited free time right now that aims to be this. It won&#39;t do 5.4GHz, but can do 2.4 (WiFi,Bluetooth) and will have open software and gateware for doing (and probably fuzzing) both, among other things.</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Nov-18 10:40 AM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Expect it sometime in 2020</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Prototypes probably around defcon 2019</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">08-Nov-18 10:49 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That sounds really cool <span class="mention" title="jonah#2861">@jonah</span> !</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">So a random adapter on Amazon is like $10.  @hackgnar who made BLECTF (<a href="http://www.hackgnar.com/2018/06/learning-bluetooth-hackery-with-ble-ctf.html?m=1">http://www.hackgnar.com/2018/06/learning-bluetooth-hackery-with-ble-ctf.html?m=1</a> ) recommends  a SENA BLE adapter that runs like $45 or something....  I don&#39;t know why that one is a) so big and b) so expensive....</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://www.hackgnar.com/2018/06/learning-bluetooth-hackery-with-ble-ctf.html?m=1"><span class="markdown">Learning Bluetooth Hackery with BLE CTF</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Do you want to get into tinkering and hacking Bluetooth LE devices? &#160; Up until now, doing so was very much a DIY process. &#160; You would h...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://3.bp.blogspot.com/-yCWBcwRz3L8/WyFCPQ1OLOI/AAAAAAAABCc/7rju3oN8EfYXywXoJZDf12k-lgIaeRfPgCK4BGAYYCw/w1200-h630-p-k-no-nu/Screen%2BShot%2B2018-06-07%2Bat%2B7.17.49%2BPM.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://3.bp.blogspot.com/-yCWBcwRz3L8/WyFCPQ1OLOI/AAAAAAAABCc/7rju3oN8EfYXywXoJZDf12k-lgIaeRfPgCK4BGAYYCw/w1200-h630-p-k-no-nu/Screen%2BShot%2B2018-06-07%2Bat%2B7.17.49%2BPM.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339301876606566402/f1e723162117b745ca92f487638d2aad.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="jonah#2861" data-user-id="339301876606566402">jonah</span>
+                <span class="chatlog__timestamp">08-Nov-18 10:58 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Rando adapters on amazon may have no Linux supporting drivers, bad range, poor or undocumented bt profile support, throughput, and weird pairing issues</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Bluetooth is a nuts spec</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The SENA one that is recommended seems legit and a safer bet than trying a few other cheapies</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Nov-18 11:00 AM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+                        <div class="chatlog__content">
+                            <span class="markdown">In other news I&#39;m still horrified that a spec as crazy as... literally any of Bluetooth... ever met wide adoption</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Nov-18 11:01 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">06-Dec-18 05:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Not sure where to ask for help on this, but does anyone know what this circuit is or does? Sorry for low res</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/520412982493184010/image0.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/520412982493184010/image0.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">06-Dec-18 05:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="feath3rz#3896">@feath3rz</span>   nope but found <a href="https://www.instructables.com/id/DIY-EEG-and-ECG-Circuit/">https://www.instructables.com/id/DIY-EEG-and-ECG-Circuit/</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="06-Dec-18 07:30 PM">(edited)</span>
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.instructables.com/id/DIY-EEG-and-ECG-Circuit/"><span class="markdown">DIY EEG (and ECG) Circuit</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">DIY EEG (and ECG) Circuit: EEGs are a noninvasive way to look into your brain. While the brain is extremely complex, areas of it can lock into circular firing patterns, resulting in telltale brain waves that one can observe with the right equipment. Intensity of these waves...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://cdn.instructables.com/ORIG/FEH/C1XA/H5TU9RMD/FEHC1XAH5TU9RMD.gif?width=495">
+                                                <img class="chatlog__embed-thumbnail" src="https://cdn.instructables.com/ORIG/FEH/C1XA/H5TU9RMD/FEHC1XAH5TU9RMD.gif?width=495" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It has that schematic on it. <div class="pre pre--multiline ">This tutorial is an in-depth guide on how to make your own simple EEG circuit.</div></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">06-Dec-18 05:44 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Woah thank you!!!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">06-Dec-18 05:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Google Reverse Image Search to the rescue.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">06-Dec-18 07:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="feath3rz#3896">@feath3rz</span> curious how you had just the schematic  but wanted to know what it was <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">11-Dec-18 10:10 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="babint#2941">@babint</span>  doh!! Late reply. But a friend had the schematic and said he didn’t know how to put his kit together. I have no idea how he did not have that website or a instruction guide lol.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">11-Dec-18 10:12 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="feath3rz#3896">@feath3rz</span> wow!! lol glad I could help then. lol</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">15-Dec-18 12:12 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Something cool is happening. Stay tuned for updates later ;)</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">15-Dec-18 02:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/523634909278109698/Screenshot_20181215-165727_Discord.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/523634909278109698/Screenshot_20181215-165727_Discord.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Who wants to see these pretty ladies unwrapped?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">15-Dec-18 03:11 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="babint#2941">@babint</span> <span class="mention" title="JoyKil#2993">@JoyKil</span> <span class="mention" title="McL0v1n[AU]#7031">@McL0v1n[AU]</span> <span class="mention" title="Tawnos#1652">@Tawnos</span> <span class="mention" title="kaosaur#3376">@kaosaur</span> <span class="mention" title="Gater_Byte#8740">@Gater_Byte</span></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">15-Dec-18 03:12 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Looks like very nice build</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">15-Dec-18 03:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Fun!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">15-Dec-18 03:36 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">New PC Build <a href="https://imgur.com/gallery/DjPVC1X">https://imgur.com/gallery/DjPVC1X</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.imgur.com/ONNypALh.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.imgur.com/ONNypALh.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Here ya go</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Full album</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">15-Dec-18 10:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Aeternalis Mage#1984">@Aeternalis Mage</span> Oh snap what  setup.  lol so much blinky in that case.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">16-Dec-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.youtube.com/watch?v=aqXSbDZggK4">https://www.youtube.com/watch?v=aqXSbDZggK4</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/rhopenshift">OpenShift</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=aqXSbDZggK4"><span class="markdown">Installing OpenShift 3.7.1 on CentOS in under 30 minutes</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">In this video, Grant Shipley shows you how to install OpenShift Origin 3.7.1 on CentOS from start to finish. The repo used in the video is located at: https:...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/aqXSbDZggK4/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/aqXSbDZggK4/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Installing OpenShift Container Platform 3.11 on bare metal
+<a href="https://www.youtube.com/watch?v=1FDphwH6cyI">https://www.youtube.com/watch?v=1FDphwH6cyI</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/gshipley21">Grant Shipley</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=1FDphwH6cyI"><span class="markdown">Installing OpenShift Container Platform 3.11 on bare metal</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">In this video, I show you how to install OpenShift Container Platform on a bare metal server.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/1FDphwH6cyI/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/1FDphwH6cyI/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">10-Jan-19 11:50 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://puri.sm/posts/how-we-designed-the-librem-5-dev-kit-with-100-free-software/">https://puri.sm/posts/how-we-designed-the-librem-5-dev-kit-with-100-free-software/</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/247814554707296256/31cfa43c7e0bab167a4a6230ff0954a9.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Digital_Tinker#7655" data-user-id="247814554707296256">Digital_Tinker</span>
+                <span class="chatlog__timestamp">16-Feb-19 01:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Does anybody have a good place to get small motors for toys? I&#39;m trying to fix a &quot;Dash and Dot&quot; robot for a school and can only find them from China or Thailand.  I&#39;m looking for one that looks like this: <a href="https://www.ebay.com/itm/DC1-5V-6V-3V-5V-Micro-300-Solar-Power-Motor-Mini-24mm-Round-Toy-Motor-long-Shaft/123203361139?hash=item1caf7e1973:m:my6o21C0q8705mqopzF4zuw:rk:13:pf:0">https://www.ebay.com/itm/DC1-5V-6V-3V-5V-Micro-300-Solar-Power-Motor-Mini-24mm-Round-Toy-Motor-long-Shaft/123203361139?hash=item1caf7e1973:m:my6o21C0q8705mqopzF4zuw:rk:13:pf:0</a>
+
+I&#39;ve tried Sparkfun, Digikey, and Adafruit but can&#39;t find anything like it on their site. The other bad part is I can&#39;t figure out the rpm on the stock motors to know exactly what I need either.</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.ebay.com/itm/DC1-5V-6V-3V-5V-Micro-300-Solar-Power-Motor-Mini-24mm-Round-Toy-Motor-long-Shaft/123203361139?hash=item1caf7e1973:m:my6o21C0q8705mqopzF4zuw:rk:13:pf:0"><span class="markdown">DC1.5V~6V 3V 5V Micro 300 Solar Power Motor Mini 24mm Round Toy Mo...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This 300 motor is different from the ordinary 300 motor. However, there’s a lug on the end of this 300 motor. Standard Shaft Copper Gear Shaft Long Shaft 6.5mm, step height. 0.02A Blocking rotor current. | eBay!</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ebayimg.com/images/i/123203361139-0-1/s-l1000.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ebayimg.com/images/i/123203361139-0-1/s-l1000.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">17-Feb-19 09:50 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Donors from the 99c store?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">25-Feb-19 03:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Came across this and thought it was neat and maybe someone will find it useful <a href="http://webench.ti.com">http://webench.ti.com</a>
+<div class="pre pre--multiline ">WEBENCH&#174; Power Designer creates customized power supply circuits based on your requirements. The environment gives you end-to-end power supply design capabilities that save you time during all phases of the design process.</div></span>
+
+                                <span class="chatlog__edited-timestamp" title="25-Feb-19 03:58 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+                        <div class="chatlog__content">
+                            <span class="markdown">&quot;TI will calculate all of the passives for you. and give you a suggested layout to follow.&quot;</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">27-Feb-19 11:12 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This is a great resource, I&#39;ve used it years ago.  There used to also be one specific to linear technologies, but they were bought a few years ago by analog devices..   looks like they have <a href="https://www.analog.com/en/design-center/ltpowercad.html">https://www.analog.com/en/design-center/ltpowercad.html</a>  ....  probably a similar principal....</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.analog.com/en/design-center/ltpowercad.html"><span class="markdown">LTpowerCAD | Analog Devices</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The LTpowerCAD&#174; design tool is a complete power supply design tool program that can significantly ease the tasks of power supply design and provides recommendations for component values and performance estimates specific to the user’s application with the μModule and mono...</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">27-Feb-19 11:18 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">talking about hardware.... did you guys see the new gear hak5 dropped yesterday?
+<a href="https://shop.hak5.org/collections/sale/products/bug">https://shop.hak5.org/collections/sale/products/bug</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://shop.hak5.org/collections/sale/products/bug"><span class="markdown">Plunder Bug</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The Plunder Bug by Hak5 is pocket-sized LAN Tap that lets you &quot;bug&quot; Ethernet connections with USB-C convenience. Coupled with cross-platform scripts and an Android root app, this smart network sniffer enables passive recording or active scanning.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://cdn.shopify.com/s/files/1/0068/2142/products/plunderbug2_600x.jpg?v=1550959645">
+                                                <img class="chatlog__embed-thumbnail" src="https://cdn.shopify.com/s/files/1/0068/2142/products/plunderbug2_600x.jpg?v=1550959645" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="💪" title="💪" src="https://twemoji.maxcdn.com/2/72x72/1f4aa.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/247814554707296256/31cfa43c7e0bab167a4a6230ff0954a9.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Digital_Tinker#7655" data-user-id="247814554707296256">Digital_Tinker</span>
+                <span class="chatlog__timestamp">27-Feb-19 12:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thanks for the heads up, I had not. That should make diagnostics as work a little easier than setting up the squirrel</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">27-Feb-19 12:44 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That is pretty slick</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 01:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Is anyone available for a few questions about programming the DC26 badge?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I just got my ST Link and soldered on the 4 pin headers.  I see from the schematic that for the STM32 side it&#39;s GND, SWDCLK, SWDIO, and VCC.  Do I connect VCC to the ST Link 3.3 or 5 volt?  Can I then run the badge off the ST Link power with the battery disconnected?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="cmdc0de#4144">@cmdc0de</span> maybe if you have a sec? <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="cmdc0de#4144" data-user-id="159474015994380288">cmdc0de</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">3.3 v</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">No, the stlink does not power the badge</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ok, safe to power it off battery with that connected?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="cmdc0de#4144" data-user-id="159474015994380288">cmdc0de</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">you&#39;ll need to plug in usb</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ok</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="cmdc0de#4144" data-user-id="159474015994380288">cmdc0de</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">no need to connect 3.3v</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">as the badge will be powered by usb or battery</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Alright, thanks.  Any recommendation for a dev environment for the STM32?  I&#39;d like to be able to use the official firmware as a starting point</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="cmdc0de#4144" data-user-id="159474015994380288">cmdc0de</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">open stm</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">sorry open workbench</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-19 02:28 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ah I see it in git now, sorry hadn&#39;t checked the firmware dir yet</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That&#39;s all for now, thanks again</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="cmdc0de#4144" data-user-id="159474015994380288">cmdc0de</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">project will just &#39;work&#39; for open workbench</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">np</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">enjoy</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 02:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">awesome</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="ploppowaffles#1483">@ploppowaffles</span> -- if you didn&#39;t get direct help with that, lmk and I can connect you to the kids who found the bug and did rewrites.
+<a href="http://www.deaddialect.com/articles/2018/8/17/badge-story">http://www.deaddialect.com/articles/2018/8/17/badge-story</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://www.deaddialect.com/articles/2018/8/17/badge-story"><span class="markdown">Breaking Badge - The DEFCON Crazy 8s</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">**Author Note: At the bottom of this article are useful links and downloadable firmware provided by Crazy 8 for those interested in solving the badge challenge.&#160;    WEDNESDAY  Monsoon season in Las Vegas during DEF CON last week was prominent. Which meant more humidity than ...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="http://static1.squarespace.com/static/56f0a2ae20c647792e9271ef/59fb7d12419202ace869fc3d/5b77834ecd8366741a783312/1534797039190/badges+together.jpg?format=1500w">
+                                                <img class="chatlog__embed-thumbnail" src="http://static1.squarespace.com/static/56f0a2ae20c647792e9271ef/59fb7d12419202ace869fc3d/5b77834ecd8366741a783312/1534797039190/badges+together.jpg?format=1500w" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="JoyKil#2993">@JoyKil</span> thanks!  but I meant the darknet 7 badge</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">cmdc0de got me on track.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ah. the DCDN26 badge <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The story of the DC26 badge is great though if you get a chance to read it. I wanted to work with that group and didn&#39;t have time, so they called me their &quot;honorary artist&quot;. and man, this team are all around 22-24 yrs old!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i was super impressed that they were the ones to discover the bug and worked with the game makers to update the firmware</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i really wished they received an honorary black badge, but the DC badge last year wasn&#39;t up for black badge <img class="emoji " alt="😦" title="😦" src="https://twemoji.maxcdn.com/2/72x72/1f626.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i&#39;ll definitely give it a read <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" />  pretty impressive</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/336603641161187328/99dd782496c33d2a314424c7ec3aa62a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="ploppowaffles#1483" data-user-id="336603641161187328">ploppowaffles</span>
+                <span class="chatlog__timestamp">15-Mar-19 03:56 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">heh, this openstm32.org site wants me to set a password over http.  manually changing the url to https just gives plaintext</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-19 03:57 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/141380384767082497/d9e763b6783512b9114fb881f49f8fc9.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="michaelansel#5664" data-user-id="141380384767082497">michaelansel</span>
+                <span class="chatlog__timestamp">08-May-19 11:55 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This seems like a fun thing to build once they get it the kinks a little more worked out: <a href="https://disaster.radio/learn/">https://disaster.radio/learn/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://disaster.radio/learn/"><span class="markdown">learn about the project | disaster.radio</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Learn more about disaster.radio.</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Take a couple cheap radios, glue them together, and make a mesh out of it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">08-May-19 12:07 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="michaelansel#5664">@michaelansel</span> I don&#39;t know how it compares but have you heard of the ARDEN network ?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/141380384767082497/d9e763b6783512b9114fb881f49f8fc9.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="michaelansel#5664" data-user-id="141380384767082497">michaelansel</span>
+                <span class="chatlog__timestamp">08-May-19 12:47 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">have not</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ahh <a href="https://www.arednmesh.org/">https://www.arednmesh.org/</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That looks fun</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">28-May-19 10:24 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.eventbrite.com/e/hackaday-superconference-2019-tickets-60129236164">https://www.eventbrite.com/e/hackaday-superconference-2019-tickets-60129236164</a> Supercon early bird tickets are on sale right now, they usually sell out the first day. <span class="mention" title="krux#2949">@krux</span></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(246,104,47,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.eventbrite.com/e/hackaday-superconference-2019-tickets-60129236164"><span class="markdown">Hackaday Superconference 2019</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Hackaday Superconference
+November 15th, 16th, and 17th in Pasadena CA
+The Hackaday Superconference&#160;is the greatest gathering of hardware hackers, builders, engineers and enthusiasts in the world.
+Expect something different. Hundreds of engineers and engineering enthusiasts g...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F62913923%2F65519003913%2F1%2Foriginal.20190527-002948?w=1000&auto=compress&rect=0%2C2%2C8992%2C4496&s=d812755b85881f7e61ff060ce04f1db1">
+                                                <img class="chatlog__embed-thumbnail" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F62913923%2F65519003913%2F1%2Foriginal.20190527-002948?w=1000&auto=compress&rect=0%2C2%2C8992%2C4496&s=d812755b85881f7e61ff060ce04f1db1" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">28-May-19 02:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">damn early bird already sold out</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/265449651862372352/2b4f83b2951e932c7f763601b61a8cee.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="PandaSD_KM6UMI#8984" data-user-id="265449651862372352">PandaSD_KM6UMI</span>
+                <span class="chatlog__timestamp">30-May-19 06:01 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I am going to try to volunteer this year.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👌" title="👌" src="https://twemoji.maxcdn.com/2/72x72/1f44c.png" />
+                                    <span class="chatlog__reaction-count">2</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">12-Jun-19 12:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/588456901948211211/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/588456901948211211/unknown.png" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">12-Jun-19 04:47 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/JjjOc09wXQo">https://youtu.be/JjjOc09wXQo</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/riggstalgic">JohnRiggs</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/JjjOc09wXQo"><span class="markdown">E3 2019: Awesome Puzzle Maze from Pixxl Cube</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">I love finding random stuff at E3. This is awesome!! Subscribe! <img class="emoji " alt="►" title="►" src="https://twemoji.maxcdn.com/2/72x72/25ba.png" /> <a href="https://goo.gl/BuAo7j">https://goo.gl/BuAo7j</a> --Social Media-- FB <img class="emoji " alt="►" title="►" src="https://twemoji.maxcdn.com/2/72x72/25ba.png" /> <a href="https://facebook.com/riggstalgic">https://facebook.com/riggstalgic</a> Tweet <img class="emoji " alt="►" title="►" src="https://twemoji.maxcdn.com/2/72x72/25ba.png" /> http:/...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/JjjOc09wXQo/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/JjjOc09wXQo/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">12-Jun-19 04:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://boldport.com/shop">https://boldport.com/shop</a> If you wanna see some fun circuit critters boldport has some beautiful PCBS and designs</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://boldport.com/shop"><span class="markdown">Shop — Boldport</span></a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="http://static1.squarespace.com/static/539604e8e4b0d1f9ffe9ff0b/t/56461f23e4b0a44127f69500/1447436068811/logo-favicon-400x400.png?format=1500w">
+                                                <img class="chatlog__embed-thumbnail" src="http://static1.squarespace.com/static/539604e8e4b0d1f9ffe9ff0b/t/56461f23e4b0a44127f69500/1447436068811/logo-favicon-400x400.png?format=1500w" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">13-Jun-19 12:45 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://abnielsen.com/2018/10/02/business-card-rf24-ws2812b-attiny84-usb/">https://abnielsen.com/2018/10/02/business-card-rf24-ws2812b-attiny84-usb/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://abnielsen.com/author/anders/">Anders</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://abnielsen.com/2018/10/02/business-card-rf24-ws2812b-attiny84-usb/"><span class="markdown">ATTiny84 USB-capable business card featuring 2.4Ghz wireless and W...</span></a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://abnielsen.com/wp-content/uploads/2018/10/20181001_0077.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://abnielsen.com/wp-content/uploads/2018/10/20181001_0077.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/342018197102264324/8171e0018b324a985d8973910b17731d.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="|)3vice#5440" data-user-id="342018197102264324">|)3vice</span>
+                <span class="chatlog__timestamp">29-Jun-19 10:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">wow, that is a sick business card... but you would have to be 1%er to hand them out freely</span>
+
+                                <span class="chatlog__edited-timestamp" title="29-Jun-19 10:38 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/232340330114973698/8e6b3d85bd3508a95dc2d114f75f4d35.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="HopeAnnihilator#0770" data-user-id="232340330114973698">HopeAnnihilator</span>
+                <span class="chatlog__timestamp">29-Jun-19 05:19 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/594683496656535563/Screenshot_20190629-191938_Chrome.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/594683496656535563/Screenshot_20190629-191938_Chrome.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Some of my Kickstarter backed projects just came in.... That I backed a while ago....</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Jul-19 12:50 PM">(edited)</span>
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/596789883390132245/IMG_20190705_124810_copy.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/596789883390132245/IMG_20190705_124810_copy.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Gater_Byte#8740">@Gater_Byte</span> heh kickstarted that too. It had been so long I was generally confused on what it was at first.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/232340330114973698/8e6b3d85bd3508a95dc2d114f75f4d35.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="HopeAnnihilator#0770" data-user-id="232340330114973698">HopeAnnihilator</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:51 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What is the big port on right side in middle?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Or is it even a port?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/596790545167155200/JPEG_20190705_125223.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/596790545167155200/JPEG_20190705_125223.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ethernet port</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/502194747595554826/596790670585495563/JPEG_20190705_125256.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/502194747595554826/596790670585495563/JPEG_20190705_125256.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Right <span class="mention" title="babint#2941">@babint</span> !!!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/232340330114973698/8e6b3d85bd3508a95dc2d114f75f4d35.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="HopeAnnihilator#0770" data-user-id="232340330114973698">HopeAnnihilator</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Usb 2.0? How old is that?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:55 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://libre.computer/products/boards/aml-s805x-ac/">https://libre.computer/products/boards/aml-s805x-ac/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://libre.computer/author/dsx724/">News</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://libre.computer/products/boards/aml-s805x-ac/"><span class="markdown">AML-S805X-AC (La Frite)</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">AML-S805X-AC (La Frite)</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i0.wp.com/libre.computer/wp-content/uploads/2017/09/cropped-logo-libre-512.png?fit=512%2C512&ssl=1">
+                                                <img class="chatlog__embed-thumbnail" src="https://i0.wp.com/libre.computer/wp-content/uploads/2017/09/cropped-logo-libre-512.png?fit=512%2C512&ssl=1" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:56 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m still interested in their phone. Other than the fact that most of the apps that I need to use wouldn&#39;t exist.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/232340330114973698/8e6b3d85bd3508a95dc2d114f75f4d35.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="HopeAnnihilator#0770" data-user-id="232340330114973698">HopeAnnihilator</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:56 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Does it have benefits over RPi?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">05-Jul-19 12:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">When I bought it it&#39;s only 15 bucks... Back when comparing to the pi 3 is better.... But definitely not</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="GuloGuloDesu#9762">@GuloGuloDesu</span> are you talking about this? <a href="https://puri.sm/products/librem-5/">https://puri.sm/products/librem-5/</a>    libre vs librem</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://puri.sm/products/librem-5/"><span class="markdown">Librem 5 – Purism</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The only modern smartphone you can (truly) own. To many in the world, modern smartphones have become the single most significant piece of technology in their lives, a gateway to the world and representing your digital life. This comes at a price however: the tech industry hav...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://puri.sm/wp-content/uploads/2018/12/shell-l5-1.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://puri.sm/wp-content/uploads/2018/12/shell-l5-1.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">05-Jul-19 01:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yup, my bad.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">05-Jul-19 01:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">You&#39;re good the names are super close... <span class="mention" title="GuloGuloDesu#9762">@GuloGuloDesu</span> I&#39;m super excited for the phone but will not pre-order it until it&#39;s released and they get a couple positive reviews. Because it&#39;s not cheap for a phone, but I&#39;m completely behind their ideology.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/342018197102264324/8171e0018b324a985d8973910b17731d.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="|)3vice#5440" data-user-id="342018197102264324">|)3vice</span>
+                <span class="chatlog__timestamp">07-Jul-19 12:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">agree, that looks great, but I have a rule about preorder phones and tablets, never over $200 unless they are an established brand. Was burnt hard by the idiots on one, I was all in on the Jolla Tablet, then they took the money and ran.</span>
+
+                                <span class="chatlog__edited-timestamp" title="07-Jul-19 12:37 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I have been on the lookout for a good phone that shows some sort of consideration for my welfare. Still on a Win10 phone because of it.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Tawnos#1652" data-user-id="313144882036342785">Tawnos</span>
+                <span class="chatlog__timestamp">10-Jul-19 03:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Gater_Byte#8740">@Gater_Byte</span> I&#39;m excited because these are finally shipping: <a href="https://www.kickstarter.com/projects/udoo/udoo-bolt-raising-the-maker-world-to-the-next-leve">https://www.kickstarter.com/projects/udoo/udoo-bolt-raising-the-maker-world-to-the-next-leve</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.kickstarter.com/profile/udoo">UDOO</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.kickstarter.com/projects/udoo/udoo-bolt-raising-the-maker-world-to-the-next-leve"><span class="markdown">UDOO BOLT: Raising the Maker World to the Next Level</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Almost twice as fast as the MacBook Pro 13&quot;, for VR, AR, and AI projects. The first Maker PC with the AMD Ryzen™ Embedded V1000</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://ksr-ugc.imgix.net/assets/020/985/274/0b89bfb9af29acb0b6797a5957db1e93_original.png?ixlib=rb-2.1.0&crop=faces&w=1552&h=873&fit=crop&v=1527779124&auto=format&frame=1&q=92&s=e7b5c198614507590a1d011bae16b28e">
+                                                <img class="chatlog__embed-thumbnail" src="https://ksr-ugc.imgix.net/assets/020/985/274/0b89bfb9af29acb0b6797a5957db1e93_original.png?ixlib=rb-2.1.0&crop=faces&w=1552&h=873&fit=crop&v=1527779124&auto=format&frame=1&q=92&s=e7b5c198614507590a1d011bae16b28e" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:33 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.amazon.com/Jewelers-Double-Loopy-Loupe-Glasses/dp/B006I80E1S?th=1">https://www.amazon.com/Jewelers-Double-Loopy-Loupe-Glasses/dp/B006I80E1S?th=1</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Has anyone used these? if so which ones do you suggest?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:34 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Aeternalis Mage#1984">@Aeternalis Mage</span> Have not as for what to suggest what are you using it for</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:35 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Aeternalis Mage#1984">@Aeternalis Mage</span> don&#39;t bother</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:35 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">huh?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:35 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.amazon.com/gp/product/B01H8808H6/">https://www.amazon.com/gp/product/B01H8808H6/</a>  get this instead</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:36 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.amazon.com/gp/product/B06XSQTNJY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">https://www.amazon.com/gp/product/B06XSQTNJY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:36 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i have one, they&#39;re good</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:36 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If I just want to look at something on a board I use that because I don&#39;t like helping hands or having stuff on my face.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">can you put all boards under that though?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/427578603207917580/80b83b692d264590d2cc6376752db369.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="babint#2941" data-user-id="427578603207917580">babint</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Also perfect for soldering tiny LEDs and its in perfect focus. Probably depends on the board shape</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="kaosaur#3376">@kaosaur</span> No but was perfect for solder challenge for Toorcon <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i use a quad hands</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.amazon.com/gp/product/B00GIKVP5K/">https://www.amazon.com/gp/product/B00GIKVP5K/</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">with silicone pads on the clips</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:38 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m all about the panavise.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">When Tamara showed me hers, I fell in love.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210928565770911744/bd68f4405e2de57cbfbdc17a3cdf3b9f.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaosaur#3376" data-user-id="210928565770911744">kaosaur</span>
+                <span class="chatlog__timestamp">14-Jul-19 11:38 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i also have a panavise but my desk is glass/aluminum</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Jul-19 11:39 AM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">the only way I can mount anything, like I do with my lights, is to screw them down onto a board and then hold the board to the desk with clamps</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">that also means every time I mount anything, i have to replace two of my clamps</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Tawnos#1652" data-user-id="313144882036342785">Tawnos</span>
+                <span class="chatlog__timestamp">14-Jul-19 02:11 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Aeternalis Mage#1984">@Aeternalis Mage</span> i just have a normal jeweler&#39;s loupe with built in leds. I figure if I need something to solder that small, i should be using a microscope <img class="emoji " alt="😉" title="😉" src="https://twemoji.maxcdn.com/2/72x72/1f609.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/108523310102396928/afcb91adbbcf42330035de9c2d29f809.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Aeternalis Mage#1984" data-user-id="108523310102396928">Aeternalis Mage</span>
+                <span class="chatlog__timestamp">14-Jul-19 02:12 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i just wanted a hands free mode</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/247814554707296256/31cfa43c7e0bab167a4a6230ff0954a9.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Digital_Tinker#7655" data-user-id="247814554707296256">Digital_Tinker</span>
+                <span class="chatlog__timestamp">14-Jul-19 02:23 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;ve got <a href="https://www.amazon.com/Plugable-Microscope-Flexible-Observation-Magnification/dp/B00XNYXQHE">https://www.amazon.com/Plugable-Microscope-Flexible-Observation-Magnification/dp/B00XNYXQHE</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/232340330114973698/8e6b3d85bd3508a95dc2d114f75f4d35.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="HopeAnnihilator#0770" data-user-id="232340330114973698">HopeAnnihilator</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:34 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That&#39;s the soldering guy was using and it worked great</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="GuloGuloDesu#9762">@GuloGuloDesu</span> I have a couple Panavises.  One I use for circuit boards, and another I use for locks.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:24 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I haven&#39;t thought of using them for locks. That&#39;s a great idea.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/147031464993751040/aa08ce71df98d638a14a8ab3913e2620.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="krux#2949" data-user-id="147031464993751040">krux</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I only thought of that because I saw LockPickingLawyer and BosnianBill do that on their youtube channels.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">which ones do you get? because there is a list of them  <a href="https://www.amazon.com/s?k=Panavises&ref=nb_sb_noss_2">https://www.amazon.com/s?k=Panavises&amp;ref=nb_sb_noss_2</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">15-Jul-19 01:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I use the 324 from that link.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">But if you buy the good base (the one the 324 uses), then you can change out the tops on it.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">2</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="💯" title="💯" src="https://twemoji.maxcdn.com/2/72x72/1f4af.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
