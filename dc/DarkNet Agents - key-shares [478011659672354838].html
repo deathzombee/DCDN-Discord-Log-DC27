@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DarkNet Agents - key-shares</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 500;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+
+.chatlog__bot-tag {
+    margin-left: 0.3em;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    padding: 1px 2px;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    position: relative;
+    top: -.2em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/195964762993983490/c3dff8bc42ce61b23022df44017e181d.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">DarkNet Agents</div>
+        <div class="info__channel-name">key-shares</div>
+        
+
+        <div class="info__channel-message-count">5 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/207567662203666432/3568ba9480bd01612db913e4d4a92622.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="silk#5143" data-user-id="207567662203666432">silk</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The March Hare node opened once the Mad Hatter moved control off of it.  It is broadcasting all 10 key shares though the C2 system is no longer broadcasting commands.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">8018e64062cf84825725733796b18661cfbff0dbf5f7491ed9cdad52e3ef59285d2d0e6efd1ec48e9f31589e3d2dcd683495cbef0520201b101ab4ba03d080c6e4dec7ba5f895743199a445e54a01441ce141457197543f9225a522a4cf4dc9c0a4ca5422fe90137db0dd6977550078524ef2cd317ee96bd44fc5aeb5067d9fc68b434ff3784171d7e485c7df1b87a13cad15a7f4c3080bf69126bd426c7544df4e25656a5fcb4472d399207bb46f7938122362bf4f173849cc3c05ec31c0c12b8d13a87c7cbd0934fea41f68b3f3b0bf4217abcf2752624539eb780627c48c4bf5faaf920f5a42879c81226e8d547bd0d5ffb32a801fd4fc8174d1fd3eee113ac1
+8022dc98a018f348513cd701ded27c36a0da72495febcb54c5cc5fa7c38f85e1cc8b7de4960dfc3b0d29d4d9c176a3c76f2887233521110231272ec181e8d86e49e53197ea9f2f3b9cb9c5be85d6fe8d24faabe30dcfc04ffc700819ae5ba5d913dcfe83d1a1c747cb7fbdca68a974d22a72315dbf56ee2c93076fbd33208f46b6eb06e81415824f67ea6c2440f5fb8349ba1d707f72a5923f12da51b47accde8c656cdff446995ac0d95f9c1d3bfb2dabb6f738b05b9b799734e47c3a3ef7c26b183544063a5356229395671cb947483033d1fea0be76a12e3f2422aa155503d18a752d3e34a26d62606b813b01679a851f27ac3d6ca419a0a4a0295177d2190ba
+803fc896acafc90f1abcff2a702d84c18e859ca890e74e5dce446137bd2ddcd1d7dba9c8006899cbef1239683eb0b280b9eefcc26971f9d116f28649a3d118272becd87f3f64948ed14906264940dd0753263361754471503b65b7fb29c25217076681390ee75b8f51a553cf7d3d33931aac4e6cd9d447e17b0f0d249efefb9b7bbbd27aeed74ad9396bc317c2c4e948e3bbf42ed4c195e6040086ae0c059c7a1b673d448285ce2bfe7d9ee7dac886f202fb2ff289ab4d9eafc0a64ff123753487f5da2bf3c65aa0a1be9c0b70ce926124cb2ed9e6cd1056cd35bfc5df1e1cc990eb8532d55e3e58217a4a24223a568e120dee0015c761ca1a0fa50346bd5f494e6</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">804f71c7ce14bd7d3f53479abf98f743225ee3f295def8a8e1160c78dff10607099cf3f71f554d27b18540dfb7b91e5e984b97b788f6c965578d4bff2292ab7a3966942c55f57271b1a1e1b252cbc846304d44b35574eabed8fbcd0de6b36b257afe601260474b98ed55ec0f429c768bf3fea5c77fdaf4a3dda4f24365c909aeef09d877fa209e11a798336d5324a0d0c73ff058c506efd3d1070bdf8cbcdf12b7d30ce49cee7920e1606921246e3fd9f8b5334ebf5a1c0025ed4a08c850b1e6cc8629f427246e57ed8d66961774ba4d1265df6309d7df1e538f8e4fd3b5ff8d7d4725b01a13adb6dc2e09dbb057ccff3d682cb7a182bd74b432059c099b742e656
+805fe55d39b6a715b4ef5286911377309c6ad282806aac1e071bdf45e9edf333ad165c72ce1bdf1b8cb04e9b1382710aad7b744a1cfbbe83dbfcf786ede7c51fd19957d9047f5a733a584c2b7b37785a13dc64b8bbdc4065c077909b6ee99dadf0e1f40bd690b70e3159e5ff3a51d5e3fd5582f98cd9022d25d9e2b2aa1c82a4dcb8aee3e28da005732e0faac8d09bff013dc1c2d5a89be12ade572b67b326b0e49399d78aa9b11cfd5b50f479ee84fa3f57c4e59937b5d515ed7211b91a00ddb1017a0c8e2ad4c5f6caa6bc24e283e169fb429c23b78814bfb4dc2bf483d04ad4dfb92ad6e96f4409c9b09712cb86119bdd876141bfc72a07398be6a7665aacf02
+806508d71fffacfb07d6f3a257b8c1cf2b32105e68dcd7fa1fedbd46a640082f1bb0761a10eeda8a4f495bacaa77cddaccb87b90f8025ed059352a353e31d942eb3519bc5181a8a806249c0b023f8ac0e52a398976cc9828070bda9ffbcbd3c2457b33bd1c92eff00700b5cb1857d63de25eb4e7ae7f826c9b0b30a80715bf2319f677725e67aa67b724c6d202d4fb223402bd6a531389fdd5fbfc8b2fd589400f2f632500bed4cd3d280e1361cbaadc7cbe7ceba19d6b4500c0867dbf38ab44fc208c0245505cf22eeae3b60dc0c5e427f69d5371d5d1fe368d9db50fea726e4881f5f29f2c1a73b5345690cf7960e165706df1561655c6751772ff225ad83e241</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">80700f5fb0ff2e245c54db08516fd820faac11177e1314149cbdf164f98ad9e34fd2e3f7406879de995ac379d545e7ef7bac0e30abf88fc62b7aa0f6a0b7d354c52f49f63c3e85c0b77f9d8f103e8ef6b9e29bbecbf90886edbc2ad90dce7b5d79a461cf59bd966c1cfcab36a2d78916f09a0560036b66b549d2affd5e9b704d5b92f1e397eff1da3e689878dfea711243b85efb304ff170d305c4f46d1c6412a6a1bc6714f378d9aad734af756328aab71a4ac0f1dcebc9a9f60b35313523003c6f7f50b483637564f9f5a5cf763900f507d794d9fd7c8fcea74feef857551f50db4358c3a48b7d35434662269949151d545940bf807961e9ac134f58271dc2f40
+8081b97ddef374df2a030cfce7d87425f4e3c4dfba700e38c7584c82666d0bb64a8910a2b8790805fb490532d12def45afbab476e7921af3f637f80fbfd8d59bfd728050bb4ec0b2149d9b0e911fb1f4e180cfbeabf29534fd15fa682ab7c727ae35fd8ecd9b0a4fbfe58c9904022c75b578c65fb4c21f14e93de284452a02925502943b9dd361d0fe10302c80e258ec4b0608d3764d319fcb02cdd5b8919e52fe05238d888a0d3d358bcbe3369481395acecb3e409f9559eb1d050fcaaf88438ed0ebe42d204f1fca0f034931a947c2961f4d8d229db27107b32ec858a77e761cb35daf183f48ba8d63d33bf4b0a545b00f4233590db68e4632cdf01d4337eb131
+80912d5bcbcf197e257c9847d271626ff8c98b482b80e130b9d75f8a55977487db5a228182e53c8984af3c475aa65ab1b98fe7de1cee3e756080a105980522349a6714cb4c27ce8ce4af9b0381383acd7f140dcb2e7b7f794f69bf0aa962540fabd04b16004d8e8a16b021a5440fd0c626e7b66605170a3e5b1c7a870f8776c71b8d1e4465ddd918ed101e2c4a8b37757b271f93120689873b6a6390aad296d3efeb252fc10b9e64810e0c9ecc66652d931143b51aab1c13cd04cc2d26ae8f9b181dda7d8816933cef991366934e156a616da0f5b08aac848bfb32aabf016c81fe2bc234661af9f79f7cecc30829a51e360c69c9b80db9b17c2c687e97af741fb00</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">80abcf86663e9f766033b02e41edb2c8ade2ff7f0e55da896b46e47815ee376e01657cc0cd1b5ae387041f4b1ef00f8dd49ae7c3275fc852459137c2acf305b351eb7e279e26745ddf19dc4f92fb0a71e99abfee01b761a8f739838cd447303cbd806bff9ae5de323fc977a59855831893fb53090d7f179e1306bd6b52281956cc0322aa463f661436ece760da041a614623faaea73f9ff490f3d6a3256c6442bf37b87ee928af615a2e36ca90f84e04427d89bc34642095a6b4c9522b8631c170effea73f4d20f7b3fa40c88a9c1db65a4d06db53b3691b34fac3ac6388b65749d7807f27a1116718d3f2acde7b4bc03e949d4e7d1a8a0c805a57718d17a26144b</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DarkNet Agents - holon-defcon-absentees</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 500;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+
+.chatlog__bot-tag {
+    margin-left: 0.3em;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    padding: 1px 2px;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    position: relative;
+    top: -.2em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/195964762993983490/c3dff8bc42ce61b23022df44017e181d.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">DarkNet Agents</div>
+        <div class="info__channel-name">holon-defcon-absentees</div>
+        
+            <div class="info__channel-topic">Sadly, we can&#39;t make it to DEFCON in person, but we shall join from afar!</div>
+
+        <div class="info__channel-message-count">121 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/60130193003511808/6525c82135a235261f08c7c0d87844a5.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="deathzombee#5874" data-user-id="60130193003511808">deathzombee</span>
+                <span class="chatlog__timestamp">02-Aug-18 09:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This is a channel for everyone that sadly cant make it to Defcon this year.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If anyone who is going to defcon participates, lets see if we can cooperate and get dcdn badges for those that wont be there. 
+
+Discuss what you will miss, and if you will get there for DC 27.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">03-Aug-18 07:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">First!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I will miss the people, dcdn badge-linecon, the darknet party (DAX),</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">03-Aug-18 08:11 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That sadly is me <img class="emoji " alt="😦" title="😦" src="https://twemoji.maxcdn.com/2/72x72/1f626.png" />  Thanks for creating this page.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">03-Aug-18 08:48 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I won&#39;t miss the bank / cc statement qhere I overspent on badges!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👌" title="👌" src="https://twemoji.maxcdn.com/2/72x72/1f44c.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">03-Aug-18 11:30 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i still spending on badges without being there.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">03-Aug-18 03:42 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yeah, me too... but not as much... so far, I got the snek SAO, st4t3f4rm party badge and hopefully someone will volunteer to grab a dcdn badge for me.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/60130193003511808/6525c82135a235261f08c7c0d87844a5.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="deathzombee#5874" data-user-id="60130193003511808">deathzombee</span>
+                <span class="chatlog__timestamp">03-Aug-18 04:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">No bank woes is a benefit. I&#39;ll be there in the Mojave, and on here, but I will miss everyone in person.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I like to think I&#39;ll just be lucky225 no one ever knows that he isn&#39;t actually at defcon.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">03-Aug-18 08:09 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m hoping for the same I have 2 co-workers going.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">04-Aug-18 10:07 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Is DCA our holon acronym?</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Aug-18 10:08 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">05-Aug-18 09:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">For us DCA who get the QR is possible to get a stand in to buy our badge?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">06-Aug-18 09:43 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">They answered that in one of the channels. 2 Badges per person.  So, if you can get someone to use their second for you... you might be ok.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">06-Aug-18 11:02 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thanks, I think I am going to try get one my friends to use my QR. could possibly get them into DarkNet also who knows</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/331662746519076885/85aa08da3005d3a48481862f62d1edff.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="McL0v1n[AU]#7031" data-user-id="331662746519076885">McL0v1n[AU]</span>
+                <span class="chatlog__timestamp">06-Aug-18 11:04 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m upset you guys wont be going!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">06-Aug-18 12:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Make a toast to us at the party!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/331662746519076885/85aa08da3005d3a48481862f62d1edff.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="McL0v1n[AU]#7031" data-user-id="331662746519076885">McL0v1n[AU]</span>
+                <span class="chatlog__timestamp">06-Aug-18 12:06 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I will!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206199065824854017/f328f8ea835a2cad587c5eb027b64417.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="JoyKil#2993" data-user-id="206199065824854017">JoyKil</span>
+                <span class="chatlog__timestamp">07-Aug-18 04:23 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">For the absentees, I want to give you a behind the scenes look at one of the sculptures going up!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/476530990748139540/image.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/476530990748139540/image.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/476531073375797251/image.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/476531073375797251/image.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/476531149917650954/image.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/476531149917650954/image.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This one is over 20’ wide</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And here’s a peak at the main stage!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/476531384534564866/image.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/476531384534564866/image.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/476531419330510858/image.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/476531419330510858/image.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">You’ll all be missed this year but we’ll pour one out for you <img class="emoji " alt="☠" title="☠" src="https://twemoji.maxcdn.com/2/72x72/2620.png" /> <img class="emoji " alt="🖤" title="🖤" src="https://twemoji.maxcdn.com/2/72x72/1f5a4.png" /> <img class="emoji " alt="☠" title="☠" src="https://twemoji.maxcdn.com/2/72x72/2620.png" /></span>
+
+                                <span class="chatlog__edited-timestamp" title="07-Aug-18 04:26 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/457798587242512385/9784d6c54424f1dfa42b0d7085ae9e02.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="t3rry_c0lby#2262" data-user-id="457798587242512385">t3rry_c0lby</span>
+                <span class="chatlog__timestamp">07-Aug-18 04:29 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">awesome</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">07-Aug-18 04:45 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Incredible.  Man, it&#39;s starting to get real.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">07-Aug-18 10:48 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Now I feel official</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">08-Aug-18 06:13 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Welcome to the holon <span class="mention" title="zipmaster#8929">@zipmaster</span></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">08-Aug-18 08:37 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ty</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">08-Aug-18 12:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">08-Aug-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">How are all the absentees doing?  Anyone doing the party challenge?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">08-Aug-18 05:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I did do the party challenge up to the time. I know how to finish it but lost steam</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">08-Aug-18 06:09 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Did not know there was one.  Got to go find the the link.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Tawnos#1652" data-user-id="313144882036342785">Tawnos</span>
+                <span class="chatlog__timestamp">08-Aug-18 08:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This should be DOA - Darknet Order of the Absentee <img class="emoji " alt="😉" title="😉" src="https://twemoji.maxcdn.com/2/72x72/1f609.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">08-Aug-18 09:12 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hi. I am definitely absent this year.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">08-Aug-18 11:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="daxorid#0160">@daxorid</span> good to see ya in the channel</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">08-Aug-18 11:41 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hope my stand in scores me a badge</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="🤞" title="🤞" src="https://twemoji.maxcdn.com/2/72x72/1f91e.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">09-Aug-18 06:56 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Same here</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">09-Aug-18 11:00 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Gater_Byte#8740">@Gater_Byte</span> barring disaster I’ll be there next year.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I expect you guys will put on a kickass contest as usual</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="O Hai Thear!#0969" data-user-id="210810015529828352">O Hai Thear!</span>
+                <span class="chatlog__timestamp">09-Aug-18 11:12 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="daxorid#0160">@daxorid</span> we’re going to miss you this year &lt;3</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 11:52 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hey <span class="mention" title="daxorid#0160">@daxorid</span> , welcome!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hear you weren&#39;t going to make it either. Hope the world is treating you well.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Aug-18 11:53 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 12:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Picture of the DC badge for the absentees???</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">09-Aug-18 12:29 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Posted in spoilers</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">09-Aug-18 01:29 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Yeah#9457">@Yeah</span> the last 8 months or so have been a bitch for me, but I’ll get through it. Hope you’re there next year too.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 01:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I am paying my own way next year!  No way anyone is going to take it away from me at the last minute next year.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hope things are getting better! <span class="mention" title="daxorid#0160">@daxorid</span></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">09-Aug-18 03:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Indeed, they are.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thanks.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159464600104861696/80a188a0a2f5c65d96ee0c357a64b955.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="GuloGuloDesu#9762" data-user-id="159464600104861696">GuloGuloDesu</span>
+                <span class="chatlog__timestamp">09-Aug-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="daxorid#0160">@daxorid</span> good luck dude.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 06:24 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Anyone wants to share pictures, feel free!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If there is a way the defcon absentee&#39;s  can help out....</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">09-Aug-18 07:36 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yeah would love to see photos (abiding by usual dc consent rules of course)</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="GuloGuloDesu#9762">@GuloGuloDesu</span> you’re the one who needs it man</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Yeah#9457">@Yeah</span> you don’t live near AZ do you?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 07:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">So, just of the area... no people</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">09-Aug-18 07:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ahh ok</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">09-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Like what&#39;s for sale in the swag room... artwork on the walls... etc...</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">09-Aug-18 09:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Missing you alll!!!! And  permission was approved to take this picture!!!!! <span class="mention" title="daxorid#0160">@daxorid</span></span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Aug-18 10:00 PM">(edited)</span>
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/474795073360494593/477340263421968414/IMG_20180809_215834.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/474795073360494593/477340263421968414/IMG_20180809_215834.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="👍" title="👍" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png" />
+                                    <span class="chatlog__reaction-count">6</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🖖" title="🖖" src="https://twemoji.maxcdn.com/2/72x72/1f596.png" />
+                                    <span class="chatlog__reaction-count">2</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🍆" title="🍆" src="https://twemoji.maxcdn.com/2/72x72/1f346.png" />
+                                    <span class="chatlog__reaction-count">3</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:04 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">awesome!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:25 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It&#39;s like being there!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/159468812641501184/5e39c3a877036a7cb7f7d3f72eefeca1.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Gater_Byte#8740" data-user-id="159468812641501184">Gater_Byte</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:51 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Room was full, and had many many other agents in side rooms! <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /> it was awesome!!!!! Again, well done Agents for getting this up and running! Ya&#39;ll are Bad ass!!!!!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__reactions">
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🤜" title="🤜" src="https://twemoji.maxcdn.com/2/72x72/1f91c.png" />
+                                    <span class="chatlog__reaction-count">3</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🤛" title="🤛" src="https://twemoji.maxcdn.com/2/72x72/1f91b.png" />
+                                    <span class="chatlog__reaction-count">3</span>
+                                </div>
+                                <div class="chatlog__reaction">
+                                    <img class="emoji emoji--small" alt="🍆" title="🍆" src="https://twemoji.maxcdn.com/2/72x72/1f346.png" />
+                                    <span class="chatlog__reaction-count">1</span>
+                                </div>
+                        </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">10-Aug-18 01:00 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Back from camping an now can take a look at new quests woot</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">10-Aug-18 04:08 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It would be helpful to figure out which quests require a badge... or physical presence at DC...</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">10-Aug-18 04:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">haha well</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I solved the first part of the cmdc0de badge challenge because the photos are online <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" /></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I&#39;m guessing all these virus quests involving &quot;NPCs&quot; we have to be there for</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">briefcase, lockpick, etc</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lots of them need us to be there unfortunately</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">great escape, color of lies</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">god damn</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">this holon is screwed</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">all the more incentive to show up next year!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:26 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">analog electronics don&#39;t need on-site presence...  <img class="emoji " alt="😉" title="😉" src="https://twemoji.maxcdn.com/2/72x72/1f609.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">^^^</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">10-Aug-18 09:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="daxorid#0160">@daxorid</span>   is that you leading the scoreboard?</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Aug-18 09:17 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">10-Aug-18 09:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yeah for now</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">once I run out of shit I can do remotely I&#39;m sure I&#39;ll get wrecked</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/162332388381294592/25133cc453b7fb4af08430af220296bb.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Otter of Games#1030" data-user-id="162332388381294592">Otter of Games</span>
+                <span class="chatlog__timestamp">10-Aug-18 09:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">depends, I&#39;m not sure the local stuff is worth an astronomical amount of points or anything.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">10-Aug-18 10:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I dunno.  You are pretty high up there!</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">going to bed!  NIght DCA</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/211271073801568256/0b8bdc0a750189f14ae3937e8255e8a6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="daxorid#0160" data-user-id="211271073801568256">daxorid</span>
+                <span class="chatlog__timestamp">10-Aug-18 10:43 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lates!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 12:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">DCA... who wants to serenade Samosa to get her QR code?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Need three of us</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="daxorid#0160">@daxorid</span> , <span class="mention" title="Otter of Games#1030">@Otter of Games</span> , <span class="mention" title="zipmaster#8929">@zipmaster</span></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 03:47 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I nominate the other two <img class="emoji " alt="😛" title="😛" src="https://twemoji.maxcdn.com/2/72x72/1f61b.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 09:16 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention">@here</span> any DCA in?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yes, but not much longer.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ah ok</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Y?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Wanted to see if we could rally to get key shares but well that ship sailed</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I been adulting... dad duty.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Afk for a while. Just catching up on what I been missing, looks like a ton!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:43 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">recommended tools for sha256?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:45 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What have you tried so far?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:45 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">crackstation and passwordrecovery.io</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">MD5Decrypt?</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://md5hashing.net/hash/sha256/">https://md5hashing.net/hash/sha256/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(189,54,47,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://md5hashing.net/hash/sha256/"><span class="markdown">Hash Sha256: Encryption and reverse decryption</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">SHA-256 (256 bit) is part of SHA-2 set of cryptographic hash functions, designed by the U.S. National Security Agency (NSA) and published in 2001 by the NIST as</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://md5hashing.net/img/icon_1200x750.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://md5hashing.net/img/icon_1200x750.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Not a lot of experience with it...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Must sleep.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 10:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">good night</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">11-Aug-18 11:09 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://hashkiller.co.uk/sha1-decrypter.aspx">https://hashkiller.co.uk/sha1-decrypter.aspx</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://hashkiller.co.uk/sha1-decrypter.aspx"><span class="markdown">SHA1 Decrypter - Over 312.072 billion cracked SHA1 hashes. SHA1 De...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">HashKiller.co.uk - Over 312.072 billion cracked SHA1 hashes. Your free online SHA1 decryption and encryption website - SHA1 Decrypter</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I used this one in the last challange</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/264576326227329025/b4aa8c4cdc3bc0a4cf46e9f4b5bda893.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="zipmaster#8929" data-user-id="264576326227329025">zipmaster</span>
+                <span class="chatlog__timestamp">11-Aug-18 11:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">hmm maybe I have the wrong hash then</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">11-Aug-18 11:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://crackstation.net">https://crackstation.net</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://crackstation.net"><span class="markdown">CrackStation - Online Password Hash Cracking - MD5, SHA1, Linux, R...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Crackstation is the most effective hash cracking service. We crack: MD5, SHA1, SHA2, WPA, and much more...</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This one will look at multiple hashes at o.ce</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/333040972126748672/7080396540d3213caf27381d71aab194.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Yeah#9457" data-user-id="333040972126748672">Yeah</span>
+                <span class="chatlog__timestamp">12-Aug-18 12:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">hope the absentee&#39;s had fun!  I know I did.  Still would have liked to put up a bunch more points, but I learned a lot.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210710194970296320/8d31c447540129b06388515796e32c70.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="gateherder#7641" data-user-id="210710194970296320">gateherder</span>
+                <span class="chatlog__timestamp">12-Aug-18 12:23 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">learning is where it&#39;s at!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/418307765358821386/157de3f63b26ace4bbc631d38e57a175.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="WeLuffYou#0630" data-user-id="418307765358821386">WeLuffYou</span>
+                <span class="chatlog__timestamp">12-Aug-18 12:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I had a lot of fun. ^_^ Great thing about DefCon is a lot of the action is online anyway.</span>
+
+                                <span class="chatlog__edited-timestamp" title="12-Aug-18 12:35 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">12-Aug-18 01:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I was finally able to login today</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">12-Aug-18 02:10 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What happened? :(</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/473517049268928536/c5379ca7aece27e9919a257892d061fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="7abby#5050" data-user-id="473517049268928536">7abby</span>
+                <span class="chatlog__timestamp">12-Aug-18 02:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Was trying from my PC.  Didnt know my mobile  was the key.  Lol.  Back to no challenge  so I&#39;ll look later to see if they will post after ceramoney  so I can try.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">12-Aug-18 02:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Sounds good :) glad it&#39;s working again</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It was down earlier today but fixed pretty quick. Discord was also causing issues early morning</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/192465068796018688/2e4985b9b07464a328cc7308b7f04bde.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Quantum Crunk#6323" data-user-id="192465068796018688">Quantum Crunk</span>
+                <span class="chatlog__timestamp">16-Aug-18 06:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">mmm hashes</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/339551736832458752/78016eb0c17723965c670f535d28d3c6.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="feath3rz#3896" data-user-id="339551736832458752">feath3rz</span>
+                <span class="chatlog__timestamp">16-Aug-18 06:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hashish</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
