@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+<style>
+   /* === GENERAL === */
+
+@font-face {
+    font-family: Whitney;
+    src: url(6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 345px;
+    max-height: 80px;
+}
+
+.info__metadata {
+    flex: 0;
+	margin-right: 10px;
+    
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 500;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+
+.chatlog__bot-tag {
+    margin-left: 0.3em;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    padding: 1px 2px;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    position: relative;
+    top: -.2em;
+}
+.center {
+  text-align: center;
+}
+</style>
+  <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+    <link rel="stylesheet" href="solarized-dark.min.css">
+    <script src="highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+<div class="center">
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="Sprite-0004.gif" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">DarkNet 2017</div>
+        <div class="info__channel-name">Index</div>
+        
+
+        
+    </div>
+</div>
+</div>
+</head>
+
+<body>
+<div class="chatlog">
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="nyan-safari.gif">
+</div>         
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="nyancat#6969" data-user-id="141380384767082497">Nyancat</span> 
+ <span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+ <div class="chatlog__content">                   
+<a href="DarkNet Agents - afterdark-net [475881838850867203].html">#afterdark-net</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>         
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span> 
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+<a href="DarkNet Agents - announcements [335520622941700106].html">#announcements</a>
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="sailor_371.png">
+</div>     
+<div class="chatlog__messages"><span class="chatlog__author-name" title="sailormoon#7777" data-user-id="141380384767082497">Sailor_Moon®</span><span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+<a href="DarkNet Agents - badgebadgebadgebadge [339616479551029248].html
+">badgebadgebadgebadge</a>
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="controller.jpg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="uwotm8#4242" data-user-id="141380384767082497">Uwotm8</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+<a href="DarkNet Agents - beer-swap [335518772943388672].html">beer-swap</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="mess_with.jpg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="2d5eva#4747" data-user-id="141380384767082497">2D5eva</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+
+<a href="DarkNet Agents - books-for-your-brain [480087421481123850].html">books-for-your-brain</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="3bc.jpg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="earthchan#8003" data-user-id="141380384767082497">Earth_Chan</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+<a href="DarkNet Agents - caff-con [600716519395164187].html">caff-con</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="The_pit.PNG">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="pitqueen#1010" data-user-id="141380384767082497">PitQueen</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content">
+<a href="DarkNet Agents - casefile2019-collaboration [599987223756275748].html">casefile2019-collaboration</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="e10a060-export.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="eternal#3145" data-user-id="141380384767082497">Eternal</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - charitable-acts [337827709885612033].html">charitable-acts</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="atago.jpg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="arara#5009" data-user-id="141380384767082497">ARARA</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - choonz-for-your-ears [335518428108685312].html">choonz-for-your-ears</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="oopza.jpeg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="itsza#4200" data-user-id="141380384767082497">ItsZa</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - combining-secret-shares [478085266775605248].html
+">combining-secret-shares</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="mojavekun.png">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="mojavekun#760-733-9969" data-user-id="141380384767082497">Mojave-Kun</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - darknet-fitness-quest-chain [479088261382537216].html">darknet-fitness-quest-chain</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="yu.bmp">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="yururururu#4353" data-user-id="141380384767082497">yururururu</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - defcon-badge-challenge [477186349783318568].html">defcon-badge-challenge</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="stan.jpeg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="stan#0001" data-user-id="141380384767082497">Stan</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - defconmemenet [335519963240726529].html">defconmemenet</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="sandbox.jpeg">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="sandbox#&#8238;กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้ ก็็็็็็็็็็็็็็็็็็็็ ก็็็็็็็็็็็็็็็็็็็็ กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้ ก็็็็็็็็็็็็็็็็็็็็ กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้ กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้ ก็็็็็็็็็็็็็็็็็็็็ ก็็็็็็็็็็็็็็็็็็็็ กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้ ก็็็็็็็็็็็็็็็็็็็็ กิิิิิิิิิิิิิิิิิิิิ ก้้้้้้้้้้้้้้้้้้้้" data-user-id="141380384767082497">sandbox</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - exploitables-help [477949347191848962].html
+">exploitables-help</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - feedback [340686229890793484].html">feedback</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - gamerz [479647786359324682].html">gamerz</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - hardware [502194747595554826].html">hardware</a> 
+</div>
+</div>
+</div> 
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - hashes-from-the-yellow-boxes [477991544834752522].html">hashes-from-the-yellow-boxes</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-aurelius [474741398940287009].html">holon-aurelius</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-dczia [340560655767830538].html">holon-dczia</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-defcon-absentees [474795073360494593].html">holon-defcon-absentees</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-sticker-squad [340516987379646465].html">holon-sticker-squad</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-tits [340590675806388225].html">holon-tits</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - holon-wetriffs [478968590700118036].html">holon-wetriffs</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - key-shares [478011659672354838].html">key-shares</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - kringlecon-temp-holon [524750231384883231].html">kringlecon-temp-holon</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - linecon-bsides [339405991244201996].html">linecon-bsides</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - linecon-defcon [336213771154358275].html">linecon-defcon</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - monero-badge-challenge [477547523838312450].html">monero-badge-challenge</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - new-channel-plz [473244226923134977].html">new-channel-plz</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - non-dn-challenges [567838733131448340].html">non-dn-challenges</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - party [195964762993983490].html">party</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - party-line-text [599094111089328138].html">party-line-text</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - play-it-again-g-man [598937844668432398].html">play-it-again-g-man</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - pre-defcon-meetup [335518078026645524].html">pre-defcon-meetup</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - quest-building [438215254451683339].html">quest-building</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - satan [339106896600498186].html">satan</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - scanning-and-sniffing-vcr [478006943571771397].html">scanning-and-sniffing-vcr</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - spoilers [335517370573651978].html">spoilers</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - twitter [335517779585269762].html">twitter</a>  
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - two-little-yellow-boxes [477991573485912065].html">two-little-yellow-boxes</a> 
+</div>
+</div>
+</div>
+<div class="chatlog__message-group">
+<div class="chatlog__author-avatar-container">
+<img class="chatlog__author-avatar" src="out.gif">
+</div>     
+<div class="chatlog__messages">
+<span class="chatlog__author-name" title="Dialtone#2600" data-user-id="141380384767082497">Dialtone</span>
+<span class="chatlog__timestamp">11-Aug-18 05:12 PM</span>
+<div class="chatlog__content"><a href="DarkNet Agents - 🍆 [601261404191981610].html"> 🍆 </a>  
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
